@@ -31,7 +31,7 @@
 // and waiting up to 5 minutes (the getReport() cache TTL below) — or hitting
 // [WEB_APP_URL]?action=invalidateCache — is the entire "publish an update"
 // workflow for this report.
-const REPORT_SHEET_ID = '1VXqsy_6meqo98MkSwUFmiOPzZnnsxO6HP95JW1JL22Y';
+const REPORT_SHEET_ID = '1ZPg6zWkIqauCFB0slozvyIt4Ny5J5hSD1H_YTTmOndw';
 
 // Event-level facts that don't live on any sheet tab because they're fixed
 // for this event (won't change between now and the report going stale).

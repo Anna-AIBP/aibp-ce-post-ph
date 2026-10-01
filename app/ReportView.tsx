@@ -910,7 +910,7 @@ export default function ReportView({ data }: { data: ReportData }) {
       <ScrollProgressBar />
 
       {/* Cover — dark diagonal wedge + gradient, echoing the PDF's cover page */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#3D2410] via-[#7A4A26] to-[#A85F30] text-white safe-top">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#2E1736] via-[#5A2E6E] to-[#854C9D] text-white safe-top">
         {/* diagonal dark wedge, bottom-left, like the cover's cityscape overlay */}
         <div
           className="absolute inset-0 bg-[#1C2340]/70 pointer-events-none"
