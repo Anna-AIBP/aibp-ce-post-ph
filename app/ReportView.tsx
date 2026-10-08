@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import type { Sponsor } from '@/lib/types'
 
 const AIBP_LOGO =
@@ -414,7 +415,15 @@ function PhotoLightbox({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
-  return (
+  // Rendered via a portal straight onto document.body — not inline in the
+  // component tree — so this full-page overlay can never be clipped or
+  // confined by an ancestor's own stacking/layout context (e.g. a card with
+  // its own rounded corners/overflow, or a scroll-reveal wrapper applying a
+  // transform mid-animation). Without the portal, `fixed inset-0` still
+  // covers the viewport in most cases, but any ancestor that happens to
+  // establish a containing block makes it cover only that ancestor instead
+  // — which is exactly the "opens within the frame" bug this fixes.
+  return createPortal(
     <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-3 sm:p-6" onClick={onClose}>
       {/* Sized to intrinsic aspect ratio (w-auto h-auto) up to almost the full
           viewport, instead of being capped to a fixed max-width — that cap was
@@ -471,7 +480,8 @@ function PhotoLightbox({
           ))}
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   )
 }
 
@@ -512,7 +522,7 @@ function VideoButton({ url }: { url: string }) {
       >
         <PlayIcon /> Watch Video
       </button>
-      {open && (
+      {open && createPortal(
         <div
           className="fixed inset-0 z-[100] bg-black/85 flex items-center justify-center p-4"
           onClick={() => setOpen(false)}
@@ -534,7 +544,8 @@ function VideoButton({ url }: { url: string }) {
               ×
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
